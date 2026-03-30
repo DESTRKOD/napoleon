@@ -4,122 +4,255 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Профиль — GHETTO LUXE</title>
+  
+  <!-- Lenis для супер-плавного скролла -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  
   <style>
     @font-face {
       font-family: 'SouthGhetto';
       src: url('SouthGhetto-Regular.woff2') format('woff2');
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'SouthGhetto', sans-serif;
       background: #000;
       color: #fff;
+      line-height: 1.5;
+      overflow-x: hidden;
     }
 
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.95);
-      padding: 20px 5%;
+      background: rgba(0, 0, 0, 0.97);
+      padding: 18px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      border-bottom: 1px solid #333;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    .logo { font-size: 2.4rem; letter-spacing: 3px; }
+    .logo {
+      font-size: 2.1rem;
+      letter-spacing: 3px;
+    }
+
     nav a {
       color: #fff;
       text-decoration: none;
-      margin-left: 45px;
-      font-size: 1.15rem;
+      margin-left: 25px;
+      font-size: 1.1rem;
     }
 
     .profile-container {
       max-width: 1100px;
-      margin: 120px auto 80px;
+      margin: 140px auto 100px;
       padding: 0 5%;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 1.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .profile-container.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .profile-header {
-      display: flex;
-      justify-content: space-between;
       background: #111;
-      padding: 40px;
-      margin-bottom: 60px;
+      padding: 40px 35px;
+      border-radius: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 70px;
       border: 1px solid #222;
     }
 
     .profile-info {
-      font-size: 1.4rem;
+      flex: 1;
+      min-width: 280px;
     }
 
-    .profile-info p { margin: 14px 0; }
+    .profile-info p {
+      font-size: 1.45rem;
+      margin: 18px 0;
+    }
+
+    .profile-info strong {
+      color: #ccc;
+    }
 
     .edit-buttons {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 16px;
+      min-width: 260px;
     }
 
     .edit-btn {
-      background: #fff;
-      color: #000;
+      background: #ffffff;
+      color: #000000;
       border: none;
-      padding: 16px 30px;
+      padding: 18px 30px;
       font-family: 'SouthGhetto';
-      font-size: 1.1rem;
+      font-size: 1.25rem;
+      border-radius: 8px;
       cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 4px 20px rgba(255,255,255,0.15);
     }
 
-    .order-history {
-      margin-top: 40px;
+    .edit-btn:hover,
+    .edit-btn:active {
+      transform: translateY(-5px) scale(1.04);
+      box-shadow: 0 12px 30px rgba(255,255,255,0.3);
+    }
+
+    /* История заказов */
+    .order-history h2 {
+      font-size: 2.4rem;
+      margin-bottom: 40px;
+      text-align: center;
     }
 
     .order-item {
-      display: flex;
-      align-items: center;
       background: #111;
+      border-radius: 12px;
       padding: 25px;
-      margin-bottom: 25px;
-      border: 1px solid #222;
+      margin-bottom: 35px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      align-items: center;
       position: relative;
+      opacity: 0;
+      transform: translateY(80px);
+      transition: all 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+      border: 1px solid #222;
+    }
+
+    .order-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .order-item img {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       object-fit: cover;
-      margin-right: 30px;
+      border-radius: 8px;
+      transition: transform 0.8s ease;
     }
 
-    .order-details h4 { font-size: 1.6rem; margin-bottom: 8px; }
-    .order-details p { margin: 6px 0; color: #ccc; }
+    .order-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .order-details {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .order-details h4 {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    .order-details p {
+      font-size: 1.3rem;
+      color: #bbb;
+      margin: 6px 0;
+    }
 
     .return-btn {
       position: absolute;
       top: 25px;
       right: 25px;
       background: transparent;
-      border: 1px solid #fff;
-      color: #fff;
-      padding: 8px 20px;
+      color: #ff5555;
+      border: 2px solid #ff5555;
+      padding: 10px 24px;
+      font-family: 'SouthGhetto';
+      font-size: 1.1rem;
+      border-radius: 6px;
       cursor: pointer;
+      transition: all 0.5s ease;
+    }
+
+    .return-btn:hover,
+    .return-btn:active {
+      background: #ff5555;
+      color: #000;
+      transform: scale(1.05);
     }
 
     .buy-again {
       position: absolute;
       bottom: 25px;
       right: 25px;
-      background: #fff;
-      color: #000;
+      background: #ffffff;
+      color: #000000;
       border: none;
-      padding: 12px 32px;
+      padding: 14px 32px;
       font-family: 'SouthGhetto';
+      font-size: 1.2rem;
+      border-radius: 8px;
       cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .buy-again:hover,
+    .buy-again:active {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 10px 25px rgba(255,255,255,0.25);
+    }
+
+    footer {
+      padding: 80px 5% 50px;
+      text-align: center;
+      background: #000;
+      border-top: 1px solid #222;
+    }
+
+    /* Адаптив */
+    @media (max-width: 768px) {
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .edit-buttons {
+        width: 100%;
+      }
+      
+      .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 25px;
+      }
+      
+      .return-btn, .buy-again {
+        position: static;
+        margin-top: 20px;
+        align-self: flex-end;
+      }
+      
+      .order-item img {
+        width: 100%;
+        height: 200px;
+      }
     }
   </style>
 </head>
@@ -135,12 +268,12 @@
   </header>
 
   <div class="profile-container">
-    <h1 style="font-size:3.5rem; margin-bottom:50px;">ПРОФИЛЬ</h1>
+    <h1 style="font-size: 3.8rem; margin-bottom: 50px; text-align: center;">ПРОФИЛЬ</h1>
 
     <div class="profile-header">
       <div class="profile-info">
         <p><strong>Имя:</strong> Иван Купчинский</p>
-        <p><strong>Номер:</strong> +7 (999) 123-45-67</p>
+        <p><strong>Номер телефона:</strong> +7 (999) 123-45-67</p>
         <p><strong>Почта:</strong> ivan@ghettoluxe.ru</p>
         <p><strong>Дата рождения:</strong> 15.03.1998</p>
       </div>
@@ -152,16 +285,16 @@
       </div>
     </div>
 
-    <h2 style="margin-bottom:30px; font-size:2.2rem;">История заказов</h2>
-
     <div class="order-history">
+      <h2>История заказов</h2>
+
       <!-- Заказ 1 -->
       <div class="order-item">
-        <img src="https://picsum.photos/id/1015/300/300" alt="">
+        <img src="https://picsum.photos/id/1015/600/600" alt="Товар">
         <div class="order-details">
-          <h4>Товар I</h4>
+          <h4>Товар I — Чёрный оверсайз худи</h4>
           <p>Сумма: 12 900 ₽</p>
-          <p>Дата: 25.03.2026</p>
+          <p>Дата: 25 марта 2026</p>
         </div>
         <button class="return-btn">ВОЗВРАТ</button>
         <button class="buy-again">КУПИТЬ СНОВА</button>
@@ -169,11 +302,23 @@
 
       <!-- Заказ 2 -->
       <div class="order-item">
-        <img src="https://picsum.photos/id/201/300/300" alt="">
+        <img src="https://picsum.photos/id/201/600/600" alt="Товар">
         <div class="order-details">
-          <h4>Товар II</h4>
+          <h4>Товар II — Жёлтые кеды Ghetto Gold</h4>
           <p>Сумма: 8 450 ₽</p>
-          <p>Дата: 12.03.2026</p>
+          <p>Дата: 12 марта 2026</p>
+        </div>
+        <button class="return-btn">ВОЗВРАТ</button>
+        <button class="buy-again">КУПИТЬ СНОВА</button>
+      </div>
+
+      <!-- Заказ 3 (можно добавить ещё) -->
+      <div class="order-item">
+        <img src="https://picsum.photos/id/237/600/600" alt="Товар">
+        <div class="order-details">
+          <h4>Товар III — Кожаная куртка</h4>
+          <p>Сумма: 24 900 ₽</p>
+          <p>Дата: 05 марта 2026</p>
         </div>
         <button class="return-btn">ВОЗВРАТ</button>
         <button class="buy-again">КУПИТЬ СНОВА</button>
@@ -181,5 +326,52 @@
     </div>
   </div>
 
+  <footer>
+    <p>© 2026 GHETTO LUXE • Все права защищены</p>
+  </footer>
+
+  <script>
+    // Lenis — супер-плавный скролл
+    const lenis = new Lenis({
+      duration: 1.8,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smoothTouch: true
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Анимации появления
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 180);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    // Запуск анимаций
+    document.querySelector('.profile-container').classList.add('visible');
+    document.querySelectorAll('.order-item').forEach(item => {
+      observer.observe(item);
+    });
+
+    // Прячем header при скролле вниз
+    let lastScroll = 0;
+    lenis.on('scroll', ({ scroll }) => {
+      if (scroll > lastScroll && scroll > 120) {
+        document.querySelector('header').style.transform = 'translateY(-100%)';
+      } else {
+        document.querySelector('header').style.transform = 'translateY(0)';
+      }
+      lastScroll = scroll;
+    });
+  </script>
 </body>
 </html>
