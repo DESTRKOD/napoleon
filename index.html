@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GHETTO LUXE</title>
+  <title>Svetlana Elite</title>
+  
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  
   <style>
     @font-face {
       font-family: 'SouthGhetto';
@@ -12,13 +14,13 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { overflow-x: hidden; }
 
     body {
       font-family: 'SouthGhetto', sans-serif;
       background: #000;
       color: #fff;
-      line-height: 1.4;
+      line-height: 1.5;
+      overflow-x: hidden;
     }
 
     header {
@@ -26,46 +28,45 @@
       top: 0;
       width: 100%;
       background: rgba(0,0,0,0.97);
-      padding: 18px 5%;
+      padding: 20px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 0.5s ease;
     }
 
-    .logo { font-size: 2.1rem; letter-spacing: 3px; }
+    .logo {
+      font-size: 2.4rem;
+      letter-spacing: 3px;
+    }
 
     nav a {
       color: #fff;
       text-decoration: none;
-      margin-left: 25px;
-      font-size: 1.1rem;
+      margin-left: 35px;
+      font-size: 1.15rem;
     }
 
-    /* Mobile menu */
-    @media (max-width: 768px) {
-      nav a { margin-left: 15px; font-size: 1rem; }
-    }
-
+    /* Hero */
     .hero {
       height: 100vh;
-      min-height: 650px;
+      min-height: 680px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: #000;
+      text-align: center;
       position: relative;
-      overflow: hidden;
     }
 
     .hero h1 {
-      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-size: clamp(3.8rem, 12vw, 7.5rem);
       text-transform: uppercase;
-      letter-spacing: 8px;
+      letter-spacing: 10px;
       opacity: 0;
-      transform: scale(0.6) translateY(80px);
-      transition: all 1.6s cubic-bezier(0.23, 1, 0.32, 1);
+      transform: scale(0.7) translateY(100px);
+      transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .hero.visible h1 {
@@ -73,25 +74,38 @@
       transform: scale(1) translateY(0);
     }
 
+    /* Разделители секций */
+    section {
+      padding: 130px 6% 100px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #333, transparent);
+      margin: 0 auto 80px;
+      max-width: 800px;
+    }
+
+    /* Каталог товаров */
     .catalog {
-      padding: 100px 5% 80px;
+      background: #000;
     }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 50px;
       max-width: 1400px;
       margin: 0 auto;
     }
 
     .product {
-      background: #0a0a0a;
+      background: #111;
+      border-radius: 12px;
       overflow: hidden;
-      border-radius: 8px;
       opacity: 0;
       transform: translateY(80px);
-      transition: all 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .product.visible {
@@ -101,57 +115,76 @@
 
     .product img {
       width: 100%;
-      height: 380px;
+      height: 420px;
       object-fit: cover;
-      transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 1.4s ease;
     }
 
-    .product:hover img,
-    .product:active img {
-      transform: scale(1.12);
+    .product:hover img {
+      transform: scale(1.08);
     }
 
     .product-info {
-      padding: 25px;
+      padding: 30px 25px;
       text-align: center;
     }
 
-    .product-info h3 { font-size: 1.65rem; margin-bottom: 12px; }
-    .price { font-size: 1.95rem; margin: 15px 0; }
+    .product-info h3 {
+      font-size: 1.75rem;
+      margin-bottom: 12px;
+    }
 
-    .add-btn {
+    .product-info p {
+      font-size: 1.25rem;
+      color: #ccc;
+      margin-bottom: 20px;
+      min-height: 48px;
+    }
+
+    .price-buy {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.9rem;
+    }
+
+    .price {
+      color: #fff;
+    }
+
+    .buy-btn {
       background: #fff;
       color: #000;
       border: none;
-      padding: 18px 40px;
+      padding: 16px 36px;
       font-family: 'SouthGhetto';
-      font-size: 1.2rem;
-      width: 100%;
-      border-radius: 6px;
+      font-size: 1.25rem;
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 0 4px 15px rgba(255,255,255,0.1);
     }
 
-    .add-btn:hover, .add-btn:active {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 10px 25px rgba(255,255,255,0.25);
+    .buy-btn:hover,
+    .buy-btn:active {
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.3);
     }
 
+    /* Слайдер рекламы */
     .ads {
-      padding: 80px 5% 100px;
-      overflow: hidden;
+      background: #000;
+      padding-bottom: 140px;
     }
 
     .slider {
       display: flex;
       width: 300%;
-      animation: slide 24s infinite linear;
+      animation: slide 26s infinite linear;
     }
 
     .slide {
       min-width: 100%;
-      height: 500px;
+      height: 520px;
       background-size: cover;
       background-position: center;
       display: flex;
@@ -164,40 +197,45 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
     }
 
     .slide-text {
       position: relative;
       z-index: 2;
-      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-size: clamp(2.2rem, 7vw, 4rem);
       text-transform: uppercase;
-      letter-spacing: 5px;
+      letter-spacing: 6px;
+      text-align: center;
     }
 
     @keyframes slide {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100%); }
-      66% { transform: translateX(-200%); }
+      0%   { transform: translateX(0); }
+      33%  { transform: translateX(-100%); }
+      66%  { transform: translateX(-200%); }
       100% { transform: translateX(-200%); }
     }
 
     footer {
-      padding: 80px 5% 50px;
+      padding: 100px 6% 70px;
       text-align: center;
       background: #000;
+      border-top: 1px solid #222;
     }
 
+    /* Адаптив */
     @media (max-width: 768px) {
-      .products { grid-template-columns: 1fr; gap: 50px; }
-      .add-btn { padding: 20px; font-size: 1.25rem; }
+      section { padding: 90px 5% 70px; }
+      .products { gap: 60px; }
+      .buy-btn { padding: 18px 40px; font-size: 1.3rem; width: 100%; }
+      .price-buy { flex-direction: column; gap: 15px; align-items: center; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">GHETTO LUXE</div>
+    <div class="logo">Svetlana Elite</div>
     <nav>
       <a href="#catalog">КАТАЛОГ</a>
       <a href="#ads">О НАС</a>
@@ -205,44 +243,58 @@
     </nav>
   </header>
 
+  <!-- Welcome -->
   <section class="hero" id="home">
     <h1>WELCOME</h1>
   </section>
 
+  <!-- Каталог -->
   <section class="catalog" id="catalog">
+    <div class="section-divider"></div>
+    
     <div class="products">
       <div class="product">
-        <img src="https://picsum.photos/id/1015/800/800" alt="">
+        <img src="https://picsum.photos/id/1015/800/800" alt="Товар 1">
         <div class="product-info">
-          <h3>Товар I</h3>
-          <p>Описание товара...</p>
-          <div class="price">12 900 ₽</div>
-          <button class="add-btn">В КОРЗИНУ</button>
+          <h3>Чёрный оверсайз худи</h3>
+          <p>Плотная ткань, свободный крой, премиальное качество</p>
+          <div class="price-buy">
+            <span class="price">12 900 ₽</span>
+            <button class="buy-btn">КУПИТЬ</button>
+          </div>
         </div>
       </div>
-      <!-- Повтори для товара 2 и 3 -->
+
       <div class="product">
-        <img src="https://picsum.photos/id/201/800/800" alt="">
+        <img src="https://picsum.photos/id/201/800/800" alt="Товар 2">
         <div class="product-info">
-          <h3>Товар II</h3>
-          <p>Описание товара...</p>
-          <div class="price">8 450 ₽</div>
-          <button class="add-btn">В КОРЗИНУ</button>
+          <h3>Жёлтые кеды Ghetto Gold</h3>
+          <p>Яркий акцент, удобная подошва, лимитированная серия</p>
+          <div class="price-buy">
+            <span class="price">8 450 ₽</span>
+            <button class="buy-btn">КУПИТЬ</button>
+          </div>
         </div>
       </div>
+
       <div class="product">
-        <img src="https://picsum.photos/id/237/800/800" alt="">
+        <img src="https://picsum.photos/id/237/800/800" alt="Товар 3">
         <div class="product-info">
-          <h3>Товар III</h3>
-          <p>Описание товара...</p>
-          <div class="price">24 900 ₽</div>
-          <button class="add-btn">В КОРЗИНУ</button>
+          <h3>Кожаная куртка Kupchino</h3>
+          <p>Натуральная кожа, тёплая подкладка, уличный стиль</p>
+          <div class="price-buy">
+            <span class="price">24 900 ₽</span>
+            <button class="buy-btn">КУПИТЬ</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Слайдер рекламы (О нас) -->
   <section class="ads" id="ads">
+    <div class="section-divider"></div>
+    
     <div class="slider">
       <div class="slide" style="background-image: url('https://picsum.photos/id/1016/1920/1080')">
         <div class="slide-text">УЛИЧНЫЙ ЛЮКС</div>
@@ -257,16 +309,16 @@
   </section>
 
   <footer>
-    <p>© 2026 GHETTO LUXE • Все права защищены</p>
+    <p>© 2026 Svetlana Elite • Все права защищены</p>
   </footer>
 
   <script>
-    // Lenis — супер-плавный скролл
+    // Lenis — плавный скролл
     const lenis = new Lenis({
-      duration: 1.6,
+      duration: 1.75,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      smoothTouch: false // на таче оставляем нативный, но можно включить
+      smoothTouch: true
     });
 
     function raf(time) {
@@ -276,26 +328,35 @@
     requestAnimationFrame(raf);
 
     // Анимации появления
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
             entry.target.classList.add('visible');
-          }, index * 120);
+          }, index * 160);
+          obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2, rootMargin: "0px 0px -80px 0px" });
+    }, { threshold: 0.18 });
 
-    document.querySelector('.hero').classList.add('visible');
-    document.querySelectorAll('.product').forEach(product => observer.observe(product));
+    // Hero
+    setTimeout(() => {
+      document.querySelector('.hero').classList.add('visible');
+    }, 400);
 
-    // Прячем header при скролле вниз
+    // Товары
+    document.querySelectorAll('.product').forEach(product => {
+      observer.observe(product);
+    });
+
+    // Скрытие шапки при скролле вниз
     let lastScroll = 0;
     lenis.on('scroll', ({ scroll }) => {
-      if (scroll > lastScroll && scroll > 150) {
-        document.querySelector('header').style.transform = 'translateY(-100%)';
+      const header = document.querySelector('header');
+      if (scroll > lastScroll && scroll > 180) {
+        header.style.transform = 'translateY(-100%)';
       } else {
-        document.querySelector('header').style.transform = 'translateY(0)';
+        header.style.transform = 'translateY(0)';
       }
       lastScroll = scroll;
     });
