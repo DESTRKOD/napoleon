@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GHETTO LUXE</title>
+  <style>
+    @font-face {
+      font-family: 'SouthGhetto';
+      src: url('SouthGhetto-Regular.woff2') format('woff2');
+      font-weight: normal;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'SouthGhetto', sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.95);
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+
+    .logo {
+      font-size: 2.4rem;
+      letter-spacing: 3px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 45px;
+      font-size: 1.15rem;
+    }
+
+    nav a:hover { color: #ddd; }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 6rem;
+      text-transform: uppercase;
+      letter-spacing: 10px;
+    }
+
+    /* Товары */
+    .catalog {
+      padding: 120px 5% 80px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .product {
+      background: #111;
+      padding-bottom: 20px;
+      border: 1px solid #222;
+    }
+
+    .product img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    .product-info h3 {
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 1.9rem;
+      margin: 15px 0;
+    }
+
+    .add-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 14px 40px;
+      font-family: 'SouthGhetto';
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Слайды рекламы */
+    .ads {
+      padding: 80px 5%;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      width: 300%;
+      animation: slide 18s infinite linear;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 520px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    }
+
+    .slide-text {
+      position: relative;
+      z-index: 2;
+      font-size: 3.2rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    @keyframes slide {
+      0%   { transform: translateX(0); }
+      33%  { transform: translateX(-100%); }
+      66%  { transform: translateX(-200%); }
+      100% { transform: translateX(-200%); }
+    }
+
+    footer {
+      background: #000;
+      padding: 80px 5% 50px;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">GHETTO LUXE</div>
+    <nav>
+      <a href="#catalog">КАТАЛОГ</a>
+      <a href="#ads">О НАС</a>
+      <a href="profile.html">ПРОФИЛЬ</a>
+    </nav>
+  </header>
+
+  <!-- Welcome -->
+  <section class="hero">
+    <h1>WELCOME</h1>
+  </section>
+
+  <!-- Товары -->
+  <section class="catalog" id="catalog">
+    <div class="products">
+      <div class="product">
+        <img src="https://picsum.photos/id/1015/800/800" alt="Товар 1">
+        <div class="product-info">
+          <h3>Товар I</h3>
+          <p>Описание товара...</p>
+          <div class="price">12 900 ₽</div>
+          <button class="add-btn">В КОРЗИНУ</button>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="https://picsum.photos/id/201/800/800" alt="Товар 2">
+        <div class="product-info">
+          <h3>Товар II</h3>
+          <p>Описание товара...</p>
+          <div class="price">8 450 ₽</div>
+          <button class="add-btn">В КОРЗИНУ</button>
+        </div>
+      </div>
+
+      <div class="product">
+        <img src="https://picsum.photos/id/237/800/800" alt="Товар 3">
+        <div class="product-info">
+          <h3>Товар III</h3>
+          <p>Описание товара...</p>
+          <div class="price">24 900 ₽</div>
+          <button class="add-btn">В КОРЗИНУ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Слайды рекламы (О нас) -->
+  <section class="ads" id="ads">
+    <div class="slider">
+      <div class="slide" style="background-image: url('https://picsum.photos/id/1016/1920/1080')">
+        <div class="slide-text">УЛИЧНЫЙ ЛЮКС</div>
+      </div>
+      <div class="slide" style="background-image: url('https://picsum.photos/id/133/1920/1080')">
+        <div class="slide-text">СДЕЛАНО В КУПЧИНО</div>
+      </div>
+      <div class="slide" style="background-image: url('https://picsum.photos/id/201/1920/1080')">
+        <div class="slide-text">КАЧЕСТВО ВЫШЕ ЦЕНЫ</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#" style="color:#fff; text-decoration:none;">Контакты</a>
+      <a href="#" style="color:#fff; text-decoration:none;">Доставка</a>
+      <a href="#" style="color:#fff; text-decoration:none;">Политика возврата</a>
+    </div>
+    <p>© 2026 GHETTO LUXE • Все права защищены</p>
+  </footer>
+
+</body>
+</html>
